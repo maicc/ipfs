@@ -1,0 +1,27 @@
+{
+  "name": "kubo-project-v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "axios": "^1.12.2",
+    "ethers": "^6.15.0",
+    "express": "^5.1.0",
+    "form-data": "^4.0.4",
+    "ipfs-http-client": "^60.0.1",
+    "kubo-rpc-client": "^6.0.2",
+    "router": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/form-data": "^2.2.1",
+    "@types/node": "^24.7.2"
+  }
+}
