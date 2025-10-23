@@ -1,4 +1,4 @@
-import { create, KuboRPCClient } from "kubo-rpc-client";
+import { create} from "kubo-rpc-client";
 import fs from "fs"
 
 export const uploadKubo = async(filePath:string)=>{
