@@ -17,7 +17,7 @@ services:
     networks:
       - ipfs-network
 
-network:
+networks:
   ipfs-network:
     driver: bridge
 
