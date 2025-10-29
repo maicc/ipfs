@@ -1,0 +1,20 @@
+services: 
+  ipfs-api: 
+    build: .
+    container_name: ipfs-api
+    ports: 
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: always
+    volumes: 
+      - /opt/data/ipfs/uploads:/app/uploads
+      - /opt/data/ipfs/cache:/app/cache
+      - /opt/data/logs/ipfs:/app/logs
+    networks: 
+      - ipfs-network
+
+network: 
+  ipfs-network:
+    driver: bridge
