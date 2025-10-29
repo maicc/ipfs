@@ -5,8 +5,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 
-RUN npm install 
 
+RUN npm ci
 COPY . . 
 
 RUN npm run build
@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install --production
+RUN npm ci --production
 
 COPY --from=builder /app/dist ./dist
 
