@@ -19,7 +19,7 @@ COPY package*.json ./
 
 RUN npm install --production
 
-COPY --from=build /app/dist ./dist
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
 
