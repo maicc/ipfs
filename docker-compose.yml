@@ -9,9 +9,9 @@ services:
       - PORT=3000
     restart: always
     volumes: 
-      - /opt/data/ipfs/uploads:/app/uploads
-      - /opt/data/ipfs/cache:/app/cache
-      - /opt/data/logs/ipfs:/app/logs
+      - /opt/apps/data/ipfs/uploads:/app/uploads
+      - /opt/apps/data/ipfs/cache:/app/cache
+      - /opt/apps/data/logs/ipfs:/app/logs
     networks: 
       - ipfs-network
 
