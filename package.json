@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc -p \"c:/Users/lynna/OneDrive/Documentos/Proyectos/ipfs/tsconfig.json\" --watch",
     "start": "node ./dist/server.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts"
@@ -15,18 +14,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "axios": "^1.12.2",
+    "cors": "^2.8.5",
     "ethers": "^6.15.0",
     "express": "^5.1.0",
     "form-data": "^4.0.4",
     "ipfs-http-client": "^60.0.1",
     "kubo-rpc-client": "^6.0.2",
+    "multer": "^2.0.2",
     "router": "^2.2.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/form-data": "^2.2.1",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.7.2"
   }
 }

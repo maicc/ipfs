@@ -1,21 +1,40 @@
 import { upload } from "../services/uploadCrustGateway.service.js";
 export const uploadController = async (req, res) => {
     try {
-        const { file } = req.body;
-        if (!file) {
+        if (!req.file) {
             return res.status(400).json({
                 sucess: false,
                 message: "No se proporciono archivo"
             });
         }
-        const cid = await upload(file);
+        const fileInfo = {
+            originalName: req.file.originalname,
+            filename: req.file.filename,
+            path: req.file.path,
+            size: req.file.size,
+            mimetype: req.file.mimetype
+        };
+        console.log('archivo recibido', fileInfo);
+        const result = await upload(fileInfo);
+        if (!result || !result.cid || !result.size || !result.url) {
+            throw new Error('Respuesta equivocada por parte del servicio');
+        }
         return res.status(200).json({
             succes: true,
-            data: cid,
-            link: `https://ipfs.io/ipfs/${cid}`
+            message: 'archivo subido exitosamente',
+            data: {
+                originalName: fileInfo.originalName,
+                cid: result.cid,
+                size: result.size,
+                url: result.url
+            }
         });
     }
     catch (error) {
         console.log("Ocurrió un error " + error);
+        res.status(500).json({
+            success: false,
+            error: error.message || 'Error al subir el archivo'
+        });
     }
 };
