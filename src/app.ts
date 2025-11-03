@@ -8,7 +8,10 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: "https://ipfsapp.hachikuji.com",
+    origin: [
+        "https://ipfsapp.hachikuji.com",
+        "http://ipfs-frontend-service:1234"  // Docker interno
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
