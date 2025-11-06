@@ -2,7 +2,7 @@ import { create } from 'kubo-rpc-client';
 import fs from 'fs';
 
 const ipfs = create({
-  host: process.env.KUBO_HOST || 'kubo',
+  host: '127.0.0.1',
   port: 5001,
   protocol: 'http',
   timeout: 300000
