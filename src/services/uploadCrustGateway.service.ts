@@ -8,7 +8,7 @@ export const upload = async (fileInfo: any) => {
         console.log('llego aquí')
         const auth = await web3Auth();
         const authHeader = Buffer.from(auth.auth).toString('base64');
-        const ipfsW3GW = 'https://gw.crustfiles.app';
+        const ipfsW3GW = 'http://127.0.0.1:5001/api/v0/add'/*'https://gw.crustfiles.app'*/;
 
         const stream = fs.createReadStream(fileInfo.path);
         const formData = new FormData();
