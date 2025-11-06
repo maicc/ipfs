@@ -34,7 +34,7 @@ export const uploadKubo = async (fileInfo: any) => {
             contentType: fileInfo.mimetype
         });
 
-        const result = await client.add(formData, {
+        const result = await client.add(stream, {
             pin: true,
             cidVersion: 1,
         })
