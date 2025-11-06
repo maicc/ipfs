@@ -3,6 +3,19 @@ import fs from "fs"
 import FormData from 'form-data'
 
 export const uploadKubo = async (fileInfo: any) => {
+    console.log('🔌 Conectando a nodo IPFS local...');
+
+    const client = create({
+        host: '127.0.0.1',
+        port: 5001,
+        protocol: 'http',
+        timeout: 300000
+    })
+
+    const version = await client.version()
+    console.log('✅ Conectado a Kubo:', version.version);
+
+
     try {
         const stats = fs.statSync(fileInfo);
         const sizeGB = stats.size / 1024 / 1024 / 1024;
@@ -10,29 +23,16 @@ export const uploadKubo = async (fileInfo: any) => {
         console.log(`Archivo: ${fileInfo}`)
         console.log(`Tamaño: ${sizeGB.toFixed(2)}GB`)
 
-        console.log('🔌 Conectando a nodo IPFS local...');
-
-        const client = create({
-            host: '127.0.0.1',
-            port: 5001,
-            protocol: 'http',
-            timeout: 300000
-        })
-
-        const version = await client.version()
-        console.log('✅ Conectado a Kubo:', version.version);
-
         console.log("Subiendo archivo grande (Esto puede tardar varios minutos)...")
         const stream = fs.createReadStream(fileInfo.path);
         const formData = new FormData();
+
+        console.log("información " +fileInfo.path)
 
         formData.append('file', stream, {
             filename: fileInfo.originalName,
             contentType: fileInfo.mimetype
         });
-
-        const startTime = Date.now();
-        let lastProgress = 0;
 
         const result = await client.add(formData, {
             pin: true,
