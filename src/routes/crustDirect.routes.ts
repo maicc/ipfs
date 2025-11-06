@@ -6,6 +6,6 @@ import { uploadSingle } from "../middlewares/upload.middleware.js";
 const router = Router();
 
 router.post("/uploadCrustDirect",uploadSingle, uploadController);
-router.post("/uploadKubo", uploadKuboController)
+router.post("/uploadKubo", uploadSingle,uploadKuboController)
 
 export default router

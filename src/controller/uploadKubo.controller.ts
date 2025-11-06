@@ -4,23 +4,46 @@ import { uploadKubo } from "../services/uploadKubo.service.js";
 export const uploadKuboController = async (req: Request, res: Response) => {
 
     try {
-        const {file} = req.body
-        if (!file) {
+        if (!req.file) {
             return res.status(400).json({
                 sucess: false,
                 message: "No se proporciono archivo"
             });
 
         }
-        const cid = await uploadKubo(file);
+
+        const fileInfo = {
+            originalName: req.file.originalname,
+            filename: req.file.filename,
+            path: req.file.path,
+            size: req.file.size,
+            mimetype: req.file.mimetype
+        };
+
+        console.log('archivo recibido', fileInfo);
+
+        const result = await uploadKubo(fileInfo);
+
+        if (!result || !result.cid || !result.size || !result.url) {
+            throw new Error('Respuesta equivocada por parte del servicio');
+        }
 
         return res.status(200).json({
-            succes: true, 
-            data: cid ,
-            link: `https://ipfs.io/ipfs/${cid}`
-        })
+            succes: true,
+            message: 'archivo subido exitosamente',
+            data: {
+                originalName: fileInfo.originalName,
+                cid: result.cid,
+                size: result.size,
+                url: result.url
+            }
+        });
 
     } catch (error: any) {
         console.log("Ocurrió un error " + error)
+        res.status(500).json({
+            success: false,
+            error: error.message || 'Error al subir el archivo'
+        })
     }
 }
